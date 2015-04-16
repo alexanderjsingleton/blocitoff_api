@@ -46,4 +46,5 @@ Blocitoff::Application.routes.draw do
     end
 
     resources :items, only: [:destroy]
+  end
 end
