@@ -1,0 +1,14 @@
+<h3>User</h3>
+  <h4><p>Name: <%= @user.name if @user.name %></p>
+  <p>Email: <%= @user.email if @user.email %></p></h4>
+  <div class="row">
+    <div class="col-md-4">
+      <ul class = "list-group" >
+        <h3 class="text-center">My Lists</h3>
+        <% @user.lists.each do |list| %>
+        <li id="list-<%= list.id %>" class="list-group-item bloc-list"><%= link_to list.title, list_path(list) %><%= link_to " ", list, method: :delete, remote: true, class: 'glyphicon glyphicon-remove glyph-right glyph-danger' %></li>
+        <% end %>
+       </ul> 
+    <%= link_to "New List", new_list_path, class: 'btn btn-success' %>
+  </div>
+</div>

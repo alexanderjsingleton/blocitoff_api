@@ -1,0 +1,12 @@
+// $('#list-' +<%= @user.list.id %>).hide();
+// <% if @list.destroyed? %>
+//   $('#list-' +<%= @user.list.id %>).fadeOut(900);
+// <% else %>
+//   $('#list-' +<%= @user.list.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>)";
+// <% end %>
+
+<% if @list.destroyed? %>
+  $('#list-' +<%= @list.id %>).fadeOut(900);
+<% else %>
+  $('#list-' +<%= @list.id %>).prepend("<div class='alert alert-danger'><%= flash[:error] %></div>)";
+<% end %>

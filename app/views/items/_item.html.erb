@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <% list.items.each do |item| %>
+    <li id="item-<%= item.id %>"class="list-group-item bloc-item" style="margin-bottom: 5px;"><%= item.name %>
+      <%= link_to " ", list_item_path(item.list, item), method: :delete, class: 'glyphicon glyphicon-remove glyph-right glyph-danger', remote: true %>
+      <small class="text-uppercase time-left glyphicon glyphicon-time">  <%= item.days_left %> days</small>
+    </li>
+  <% end %>
+</ul>
