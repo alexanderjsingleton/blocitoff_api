@@ -1,5 +1,6 @@
 class ApiController < ActionController::Base
-  skip_before_action :verify_authenticity_token
+  attr_accessor :current_user
+  skip_before_action :verify_authenticity_token 
 
   # necessary in all controllers that will respond with JSON
   respond_to :json 
@@ -15,6 +16,7 @@ class ApiController < ActionController::Base
     authenticate_or_request_with_http_basic('Administration') do |email, password|
       user = User.find_by_email(email)
       user.valid_password?(password)
+      self.current_user = user
     end
   end
 
