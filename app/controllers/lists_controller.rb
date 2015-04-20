@@ -40,6 +40,17 @@ class ListsController < ApplicationController
 
   # PATCH/PUT /lists/1
   # PATCH/PUT /lists/1.json
+
+  # def update
+  #  list = List.find(params[:id])
+  #  if list.update(list_params)
+  #    render json: list.to_json
+  #  else
+  #    render json: { errors: list.errors.full_messages }, status: :unprocessable_entity
+  #  end
+  # end
+
+
   def update
     respond_to do |format|
       if @list.update(list_params)
