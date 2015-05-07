@@ -21,27 +21,12 @@ class Api::ListsController < ApiController
 
   
   def destroy
-    @list = current_user.lists.build(list_params)
-    title = @list.title
-
+    @list = List.find(params[:id])
     if @list.destroy
-      flash[:list] = "List was removed."
-      redirect_to root_path
+      render json: @list, each_serializer: ListSerializer
     else
-      flash[:error] = "Item couldn't be deleted.  Please try again."
-      redirect_to root_path
+      render json: @list.errors, status: :unprocessable_entity
     end
-
-    # respond_to do |format|
-    #   format.html
-    #   fotmat.js
-    # end
-      
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.js
-    end
-
   end
 
  
