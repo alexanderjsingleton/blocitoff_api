@@ -30,24 +30,34 @@ class Api::ItemsController < ApiController
     end
   end
 
-  def destroy
-    @list = current_user.lists.build(list_params)
-    @item = Item.find(params[:id])
-    name = @item.name
-  
-
-    if @item.destroy
-      flash[:notice] = "Item was deleted successfully."
+    def destroy
+     @list = List.find(params[:list_id])
+     @item = Item.find(params[:id])
+    if @list.destroy
+      render json: @list, each_serializer: ListSerializer
     else
-      flash[:error] = "Item couldn't be deleted.  Please try again."
-    end
-
-    respond_to do |format|
-      format.html { redirect_to list_path(@list) }
-      format.js 
+      render json: @list.errors, status: :unprocessable_entity
     end
   end
-    
+
+   def update
+   list = List.find(params[:list_id])
+   @item = Item.find(params[:id])
+   if list.update(list_params)
+     render json: list
+   else
+     render json: { errors: list.errors.full_messages }, status: :unprocessable_entity
+   end
+ end
+
+
+
+
+
+
+
+
+
     
 
   private
