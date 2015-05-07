@@ -30,6 +30,26 @@ class Api::ItemsController < ApiController
     end
   end
 
+  def destroy
+    @list = current_user.lists.build(list_params)
+    @item = Item.find(params[:id])
+    name = @item.name
+  
+
+    if @item.destroy
+      flash[:notice] = "Item was deleted successfully."
+    else
+      flash[:error] = "Item couldn't be deleted.  Please try again."
+    end
+
+    respond_to do |format|
+      format.html { redirect_to list_path(@list) }
+      format.js 
+    end
+  end
+    
+    
+
   private
 
   def conditions_met

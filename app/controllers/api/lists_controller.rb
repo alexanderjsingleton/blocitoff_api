@@ -19,6 +19,31 @@ class Api::ListsController < ApiController
     end
   end
 
+  
+  def destroy
+    @list = current_user.lists.build(list_params)
+    title = @list.title
+
+    if @list.destroy
+      flash[:list] = "List was removed."
+      redirect_to root_path
+    else
+      flash[:error] = "Item couldn't be deleted.  Please try again."
+      redirect_to root_path
+    end
+
+    # respond_to do |format|
+    #   format.html
+    #   fotmat.js
+    # end
+      
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
+
+  end
+
  
 
   private
