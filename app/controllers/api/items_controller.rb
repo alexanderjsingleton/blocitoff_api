@@ -41,22 +41,15 @@ class Api::ItemsController < ApiController
   end
 
    def update
+   #byebug
    list = List.find(params[:list_id])
    @item = Item.find(params[:id])
-   if list.update(list_params)
-     render json: list
+   if @item.update(item_params)
+     render json: @item
    else
-     render json: { errors: list.errors.full_messages }, status: :unprocessable_entity
+     render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
    end
  end
-
-
-
-
-
-
-
-
 
     
 
@@ -69,4 +62,9 @@ class Api::ItemsController < ApiController
   def user_params
     params.require(:user).permit(:username, :password)
   end
+
+  def item_params
+    params.require(:item).permit(:name)  
+  end
 end
+
